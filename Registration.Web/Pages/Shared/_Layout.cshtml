@@ -2,7 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Subcontractor Registration" />
+    <link rel="apple-touch-icon" href="~/img/app-icon.png" />
+    <link rel="apple-touch-startup-image" href="~/img/launch.png" />
     <title>@ViewData["Title"] - Subcontractor Registration</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
@@ -49,6 +54,22 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    
+    <script>
+        // iOS web app detection and configuration
+        if (("standalone" in window.navigator) && window.navigator.standalone) {
+            document.documentElement.classList.add('ios-webapp');
+            
+            // Handle internal links in iOS web app mode
+            $(document).on("click", "a", function(event) {
+                // Only handle links that point to the same domain
+                if (this.href.indexOf(document.location.host) !== -1) {
+                    event.preventDefault();
+                    window.location = this.href;
+                }
+            });
+        }
+    </script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
