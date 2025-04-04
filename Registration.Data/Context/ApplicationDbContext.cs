@@ -16,6 +16,14 @@ namespace Registration.Data.Context
         public DbSet<Insurance> Insurance { get; set; }
         public DbSet<VerificationProgress> VerificationProgress { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseInMemoryDatabase("RegistrationDb");
+            }
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
