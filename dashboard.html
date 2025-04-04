@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Subcontractor Registration</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/site.css?v=r22M7xOahcMheWCkoVof2Nt7pQmj7mMSFKTei-SfmQ0" />
+    <link rel="stylesheet" href="/Registration.Web.styles.css?v=TszFfquoVhbvUMLKKIImJWMrTnhZXbJqSlvMjQfe7B0" />
+</head>
+<body>
+    <header b-hgolum0hqi>
+        <nav b-hgolum0hqi class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary border-bottom box-shadow mb-3">
+            <div b-hgolum0hqi class="container">
+                <a class="navbar-brand" href="/">Subcontractor Registration</a>
+                <button b-hgolum0hqi class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span b-hgolum0hqi class="navbar-toggler-icon"></span>
+                </button>
+                <div b-hgolum0hqi class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul b-hgolum0hqi class="navbar-nav flex-grow-1">
+                        <li b-hgolum0hqi class="nav-item">
+                            <a class="nav-link" href="/">Home</a>
+                        </li>
+                        <li b-hgolum0hqi class="nav-item">
+                            <a class="nav-link" href="/Registration">Registration</a>
+                        </li>
+                        <li b-hgolum0hqi class="nav-item">
+                            <a class="nav-link" href="/Dashboard">Dashboard</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div b-hgolum0hqi class="container">
+        <main b-hgolum0hqi role="main" class="pb-3">
+            
+<div class="container">
+    <h1 class="my-4">Subcontractor Dashboard</h1>
+    
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Navigation</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="list-group list-group-flush">
+                        <a href="#" class="list-group-item list-group-item-action active" id="summary-link">Summary</a>
+                        <a href="#" class="list-group-item list-group-item-action" id="equipment-link">Equipment</a>
+                        <a href="#" class="list-group-item list-group-item-action" id="drivers-link">Drivers</a>
+                        <a href="#" class="list-group-item list-group-item-action" id="documents-link">Documents</a>
+                        <a href="#" class="list-group-item list-group-item-action" id="status-link">Status Tracker</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <!-- Summary Card Component -->
+            <div class="card mb-4" id="summary-section">
+                <div class="card-header">
+                    <h5 class="mb-0">Summary</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Business Information</h6>
+                            <p><strong>Name:</strong> <span id="business-name">Loading...</span></p>
+                            <p><strong>Tier Level:</strong> <span id="tier-level">Loading...</span></p>
+                            <p><strong>Verification Status:</strong> <span id="verification-status">Loading...</span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Registration Progress</h6>
+                            <div class="progress mb-2">
+                                <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="registration-progress">0%</div>
+                            </div>
+                            <p><small>Last Updated: <span id="last-updated">Loading...</span></small></p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-body text-center">
+                                    <h3 id="equipment-count">0</h3>
+                                    <p class="mb-0">Equipment</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-body text-center">
+                                    <h3 id="driver-count">0</h3>
+                                    <p class="mb-0">Drivers</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-body text-center">
+                                    <h3 id="document-count">0</h3>
+                                    <p class="mb-0">Documents</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Equipment Management Component -->
+            <div class="card mb-4 d-none" id="equipment-section">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Equipment Management</h5>
+                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addEquipmentModal">Add Equipment</button>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="equipment-table">
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Make/Model</th>
+                                    <th>Year</th>
+                                    <th>Capacity</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Equipment rows will be populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Driver Management Component -->
+            <div class="card mb-4 d-none" id="drivers-section">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Driver Management</h5>
+                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addDriverModal">Add Driver</button>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="drivers-table">
+                            <thead>
+                                <tr>
+                                    <th>License Type</th>
+                                    <th>License State</th>
+                                    <th>Expiration</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Driver rows will be populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Document Management Component -->
+            <div class="card mb-4 d-none" id="documents-section">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Document Management</h5>
+                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#uploadDocumentModal">Upload Document</button>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="documents-table">
+                            <thead>
+                                <tr>
+                                    <th>Document Type</th>
+                                    <th>Related To</th>
+                                    <th>Uploaded</th>
+                                    <th>Expiration</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Document rows will be populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Status Tracker Component -->
+            <div class="card mb-4 d-none" id="status-section">
+                <div class="card-header">
+                    <h5 class="mb-0">Status Tracker</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group" id="status-steps">
+                        <!-- Status steps will be populated dynamically -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Equipment Modal -->
+<div class="modal fade" id="addEquipmentModal" tabindex="-1" aria-labelledby="addEquipmentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addEquipmentModalLabel">Add Equipment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="add-equipment-form">
+                    <div class="mb-3">
+                        <label for="modal-category" class="form-label">Category</label>
+                        <select class="form-select" id="modal-category" name="Category" required>
+                            <option value="">Select Category</option>
+                            <option value="Push">Push</option>
+                            <option value="LoadHaul">LoadHaul</option>
+                            <option value="Leaner">Leaner</option>
+                            <option value="Grinding">Grinding</option>
+                            <option value="HaulOut">HaulOut</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="modal-type" class="form-label">Type</label>
+                        <input type="text" class="form-control" id="modal-type" name="Type" required>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="modal-make" class="form-label">Make</label>
+                            <input type="text" class="form-control" id="modal-make" name="Make" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="modal-model" class="form-label">Model</label>
+                            <input type="text" class="form-control" id="modal-model" name="Model" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="modal-serial" class="form-label">Serial Number</label>
+                            <input type="text" class="form-control" id="modal-serial" name="SerialNumber" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="modal-year" class="form-label">Year</label>
+                            <input type="number" class="form-control" id="modal-year" name="Year" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="modal-capacity" class="form-label">Capacity</label>
+                        <input type="text" class="form-control" id="modal-capacity" name="Capacity" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="save-equipment-btn">Save Equipment</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Driver Modal -->
+<div class="modal fade" id="addDriverModal" tabindex="-1" aria-labelledby="addDriverModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addDriverModalLabel">Add Driver</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="add-driver-form">
+                    <div class="mb-3">
+                        <label for="modal-license-type" class="form-label">License Type</label>
+                        <select class="form-select" id="modal-license-type" name="LicenseType" required>
+                            <option value="">Select License Type</option>
+                            <option value="Class A">Class A</option>
+                            <option value="Class B">Class B</option>
+                            <option value="Class C">Class C</option>
+                            <option value="CDL">CDL</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="modal-license-state" class="form-label">License State</label>
+                        <select class="form-select" id="modal-license-state" name="LicenseState" required>
+                            <option value="">Select State</option>
+                            <option value="AL">Alabama</option>
+                            <option value="AK">Alaska</option>
+                            <!-- Add all states here -->
+                            <option value="WY">Wyoming</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="modal-expiration" class="form-label">Expiration Date</label>
+                        <input type="date" class="form-control" id="modal-expiration" name="ExpirationDate" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="modal-document" class="form-label">Upload License Document</label>
+                        <input type="file" class="form-control" id="modal-document" name="DocumentUpload" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="save-driver-btn">Save Driver</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Upload Document Modal -->
+<div class="modal fade" id="uploadDocumentModal" tabindex="-1" aria-labelledby="uploadDocumentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="uploadDocumentModalLabel">Upload Document</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="upload-document-form">
+                    <div class="mb-3">
+                        <label for="modal-document-type" class="form-label">Document Type</label>
+                        <select class="form-select" id="modal-document-type" name="DocumentType" required>
+                            <option value="">Select Document Type</option>
+                            <option value="Insurance">Insurance</option>
+                            <option value="License">License</option>
+                            <option value="Certification">Certification</option>
+                            <option value="Registration">Registration</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="modal-related-to" class="form-label">Related To</label>
+                        <select class="form-select" id="modal-related-to" name="RelatedTo" required>
+                            <option value="">Select Related Item</option>
+                            <!-- Options will be populated dynamically -->
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="modal-doc-expiration" class="form-label">Expiration Date (if applicable)</label>
+                        <input type="date" class="form-control" id="modal-doc-expiration" name="ExpirationDate">
+                    </div>
+                    <div class="mb-3">
+                        <label for="modal-doc-file" class="form-label">Upload Document</label>
+                        <input type="file" class="form-control" id="modal-doc-file" name="DocumentFile" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="save-document-btn">Upload Document</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </main>
+    </div>
+
+    <footer b-hgolum0hqi class="border-top footer text-muted">
+        <div b-hgolum0hqi class="container">
+            &copy; 2025 - Subcontractor Registration - <a href="/Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/site.js?v=y_Ngd8W21UpuCUhEqGbUKDEqFnNfTjAfb24GhJJGUyM"></script>
+
+    
+    <script>
+        // Dashboard navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navigation links
+            const navLinks = document.querySelectorAll('.list-group-item');
+            const sections = {
+                'summary-link': 'summary-section',
+                'equipment-link': 'equipment-section',
+                'drivers-link': 'drivers-section',
+                'documents-link': 'documents-section',
+                'status-link': 'status-section'
+            };
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Update active link
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show selected section, hide others
+                    Object.values(sections).forEach(section => {
+                        document.getElementById(section).classList.add('d-none');
+                    });
+                    
+                    const sectionToShow = sections[this.id];
+                    document.getElementById(sectionToShow).classList.remove('d-none');
+                });
+            });
+            
+            // Load dashboard data
+            loadDashboardData();
+            
+            // Equipment form submission
+            document.getElementById('save-equipment-btn').addEventListener('click', function() {
+                const form = document.getElementById('add-equipment-form');
+                if (form.checkValidity()) {
+                    saveEquipment();
+                } else {
+                    form.reportValidity();
+                }
+            });
+            
+            // Driver form submission
+            document.getElementById('save-driver-btn').addEventListener('click', function() {
+                const form = document.getElementById('add-driver-form');
+                if (form.checkValidity()) {
+                    saveDriver();
+                } else {
+                    form.reportValidity();
+                }
+            });
+            
+            // Document form submission
+            document.getElementById('save-document-btn').addEventListener('click', function() {
+                const form = document.getElementById('upload-document-form');
+                if (form.checkValidity()) {
+                    saveDocument();
+                } else {
+                    form.reportValidity();
+                }
+            });
+            
+            // Document type change handler
+            document.getElementById('modal-document-type').addEventListener('change', function() {
+                updateRelatedToOptions();
+            });
+        });
+        
+        function loadDashboardData() {
+            // In a real application, this would fetch data from the API
+            // For now, we'll use mock data
+            
+            // Summary data
+            document.getElementById('business-name').textContent = 'ABC Construction';
+            document.getElementById('tier-level').textContent = 'Tier 2';
+            document.getElementById('verification-status').textContent = 'In Progress';
+            document.getElementById('last-updated').textContent = new Date().toLocaleString();
+            
+            // Progress bar
+            const progress = 65;
+            document.getElementById('registration-progress').style.width = progress + '%';
+            document.getElementById('registration-progress').textContent = progress + '%';
+            document.getElementById('registration-progress').setAttribute('aria-valuenow', progress);
+            
+            // Counts
+            document.getElementById('equipment-count').textContent = '3';
+            document.getElementById('driver-count').textContent = '2';
+            document.getElementById('document-count').textContent = '5';
+            
+            // Load equipment table
+            loadEquipmentTable();
+            
+            // Load drivers table
+            loadDriversTable();
+            
+            // Load documents table
+            loadDocumentsTable();
+            
+            // Load status steps
+            loadStatusSteps();
+        }
+        
+        function loadEquipmentTable() {
+            const tableBody = document.querySelector('#equipment-table tbody');
+            tableBody.innerHTML = '';
+            
+            // Mock data
+            const equipment = [
+                { category: 'Push', make: 'Caterpillar', model: 'D6', year: 2018, capacity: '20 tons', status: 'Verified' },
+                { category: 'LoadHaul', make: 'Volvo', model: 'EC300', year: 2020, capacity: '30 tons', status: 'Pending' },
+                { category: 'Grinding', make: 'Vermeer', model: 'HG4000', year: 2019, capacity: '15 tons', status: 'Verified' }
+            ];
+            
+            equipment.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.category}</td>
+                    <td>${item.make} ${item.model}</td>
+                    <td>${item.year}</td>
+                    <td>${item.capacity}</td>
+                    <td><span class="badge ${item.status === 'Verified' ? 'bg-success' : 'bg-warning'}">${item.status}</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary me-1">Edit</button>
+                        <button class="btn btn-sm btn-outline-danger">Delete</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+        
+        function loadDriversTable() {
+            const tableBody = document.querySelector('#drivers-table tbody');
+            tableBody.innerHTML = '';
+            
+            // Mock data
+            const drivers = [
+                { licenseType: 'CDL', state: 'TX', expiration: '2025-06-15', status: 'Verified' },
+                { licenseType: 'Class A', state: 'CA', expiration: '2024-11-30', status: 'Pending' }
+            ];
+            
+            drivers.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.licenseType}</td>
+                    <td>${item.state}</td>
+                    <td>${item.expiration}</td>
+                    <td><span class="badge ${item.status === 'Verified' ? 'bg-success' : 'bg-warning'}">${item.status}</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary me-1">Edit</button>
+                        <button class="btn btn-sm btn-outline-danger">Delete</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+        
+        function loadDocumentsTable() {
+            const tableBody = document.querySelector('#documents-table tbody');
+            tableBody.innerHTML = '';
+            
+            // Mock data
+            const documents = [
+                { type: 'Insurance', relatedTo: 'Caterpillar D6', uploaded: '2023-05-10', expiration: '2024-05-10', status: 'Verified' },
+                { type: 'License', relatedTo: 'Driver: John Smith', uploaded: '2023-08-22', expiration: '2025-06-15', status: 'Verified' },
+                { type: 'Insurance', relatedTo: 'Volvo EC300', uploaded: '2023-09-05', expiration: '2024-09-05', status: 'Pending' },
+                { type: 'Certification', relatedTo: 'Business', uploaded: '2023-07-18', expiration: '2024-07-18', status: 'Verified' },
+                { type: 'Registration', relatedTo: 'Vermeer HG4000', uploaded: '2023-10-01', expiration: '2024-10-01', status: 'Pending' }
+            ];
+            
+            documents.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.type}</td>
+                    <td>${item.relatedTo}</td>
+                    <td>${item.uploaded}</td>
+                    <td>${item.expiration}</td>
+                    <td><span class="badge ${item.status === 'Verified' ? 'bg-success' : 'bg-warning'}">${item.status}</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary me-1">View</button>
+                        <button class="btn btn-sm btn-outline-danger">Delete</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+        
+        function loadStatusSteps() {
+            const statusList = document.getElementById('status-steps');
+            statusList.innerHTML = '';
+            
+            // Mock data
+            const steps = [
+                { step: 'Business Registration', status: 'Completed', date: '2023-05-01' },
+                { step: 'Equipment Verification', status: 'Completed', date: '2023-05-15' },
+                { step: 'Driver Documentation', status: 'In Progress', date: null },
+                { step: 'Insurance Verification', status: 'Pending', date: null },
+                { step: 'Final Approval', status: 'Pending', date: null }
+            ];
+            
+            steps.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.className = 'list-group-item';
+                
+                let statusBadge = '';
+                if (item.status === 'Completed') {
+                    statusBadge = '<span class="badge bg-success">Completed</span>';
+                } else if (item.status === 'In Progress') {
+                    statusBadge = '<span class="badge bg-primary">In Progress</span>';
+                } else {
+                    statusBadge = '<span class="badge bg-secondary">Pending</span>';
+                }
+                
+                listItem.innerHTML = `
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="mb-0">${item.step}</h6>
+                            ${item.date ? `<small class="text-muted">Completed on: ${item.date}</small>` : ''}
+                        </div>
+                        ${statusBadge}
+                    </div>
+                `;
+                statusList.appendChild(listItem);
+            });
+        }
+        
+        function updateRelatedToOptions() {
+            const documentType = document.getElementById('modal-document-type').value;
+            const relatedToSelect = document.getElementById('modal-related-to');
+            relatedToSelect.innerHTML = '<option value="">Select Related Item</option>';
+            
+            if (documentType === 'Insurance' || documentType === 'Registration') {
+                // Add equipment options
+                const equipment = [
+                    { id: 1, name: 'Caterpillar D6 (2018)' },
+                    { id: 2, name: 'Volvo EC300 (2020)' },
+                    { id: 3, name: 'Vermeer HG4000 (2019)' }
+                ];
+                
+                equipment.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = 'equipment_' + item.id;
+                    option.textContent = item.name;
+                    relatedToSelect.appendChild(option);
+                });
+            } else if (documentType === 'License') {
+                // Add driver options
+                const drivers = [
+                    { id: 1, name: 'John Smith' },
+                    { id: 2, name: 'Jane Doe' }
+                ];
+                
+                drivers.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = 'driver_' + item.id;
+                    option.textContent = 'Driver: ' + item.name;
+                    relatedToSelect.appendChild(option);
+                });
+            } else {
+                // Add business option
+                const option = document.createElement('option');
+                option.value = 'business';
+                option.textContent = 'Business';
+                relatedToSelect.appendChild(option);
+            }
+        }
+        
+        function saveEquipment() {
+            // In a real application, this would send data to the API
+            alert('Equipment saved successfully!');
+            
+            // Close modal and reset form
+            const modal = bootstrap.Modal.getInstance(document.getElementById('addEquipmentModal'));
+            modal.hide();
+            document.getElementById('add-equipment-form').reset();
+            
+            // Reload equipment table
+            loadEquipmentTable();
+            
+            // Update counts
+            const count = parseInt(document.getElementById('equipment-count').textContent);
+            document.getElementById('equipment-count').textContent = (count + 1).toString();
+        }
+        
+        function saveDriver() {
+            // In a real application, this would send data to the API
+            alert('Driver saved successfully!');
+            
+            // Close modal and reset form
+            const modal = bootstrap.Modal.getInstance(document.getElementById('addDriverModal'));
+            modal.hide();
+            document.getElementById('add-driver-form').reset();
+            
+            // Reload drivers table
+            loadDriversTable();
+            
+            // Update counts
+            const count = parseInt(document.getElementById('driver-count').textContent);
+            document.getElementById('driver-count').textContent = (count + 1).toString();
+        }
+        
+        function saveDocument() {
+            // In a real application, this would send data to the API
+            alert('Document uploaded successfully!');
+            
+            // Close modal and reset form
+            const modal = bootstrap.Modal.getInstance(document.getElementById('uploadDocumentModal'));
+            modal.hide();
+            document.getElementById('upload-document-form').reset();
+            
+            // Reload documents table
+            loadDocumentsTable();
+            
+            // Update counts
+            const count = parseInt(document.getElementById('document-count').textContent);
+            document.getElementById('document-count').textContent = (count + 1).toString();
+        }
+    </script>
+
+</body>
+</html>
