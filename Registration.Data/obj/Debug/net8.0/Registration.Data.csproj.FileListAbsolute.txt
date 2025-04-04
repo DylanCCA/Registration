@@ -1,0 +1,17 @@
+/home/ubuntu/Registration/Registration.Data/bin/Debug/net8.0/Registration.Data.deps.json
+/home/ubuntu/Registration/Registration.Data/bin/Debug/net8.0/Registration.Data.runtimeconfig.json
+/home/ubuntu/Registration/Registration.Data/bin/Debug/net8.0/Registration.Data.dll
+/home/ubuntu/Registration/Registration.Data/bin/Debug/net8.0/Registration.Data.pdb
+/home/ubuntu/Registration/Registration.Data/bin/Debug/net8.0/Registration.Core.dll
+/home/ubuntu/Registration/Registration.Data/bin/Debug/net8.0/Registration.Core.pdb
+/home/ubuntu/Registration/Registration.Data/obj/Debug/net8.0/Registration.Data.csproj.AssemblyReference.cache
+/home/ubuntu/Registration/Registration.Data/obj/Debug/net8.0/Registration.Data.GeneratedMSBuildEditorConfig.editorconfig
+/home/ubuntu/Registration/Registration.Data/obj/Debug/net8.0/Registration.Data.AssemblyInfoInputs.cache
+/home/ubuntu/Registration/Registration.Data/obj/Debug/net8.0/Registration.Data.AssemblyInfo.cs
+/home/ubuntu/Registration/Registration.Data/obj/Debug/net8.0/Registration.Data.csproj.CoreCompileInputs.cache
+/home/ubuntu/Registration/Registration.Data/obj/Debug/net8.0/Registration.Data.csproj.CopyComplete
+/home/ubuntu/Registration/Registration.Data/obj/Debug/net8.0/Registration.Data.dll
+/home/ubuntu/Registration/Registration.Data/obj/Debug/net8.0/refint/Registration.Data.dll
+/home/ubuntu/Registration/Registration.Data/obj/Debug/net8.0/Registration.Data.pdb
+/home/ubuntu/Registration/Registration.Data/obj/Debug/net8.0/Registration.Data.genruntimeconfig.cache
+/home/ubuntu/Registration/Registration.Data/obj/Debug/net8.0/ref/Registration.Data.dll

@@ -1,0 +1,435 @@
+@page
+@model Registration.Web.Pages.RegistrationIndexModel
+@{
+    ViewData["Title"] = "Registration";
+}
+
+<div class="container">
+    <h1 class="my-4">Subcontractor Registration</h1>
+    
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0">Registration Steps</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link active" id="v-pills-business-tab" data-bs-toggle="pill" href="#v-pills-business" role="tab" aria-controls="v-pills-business" aria-selected="true">Business Information</a>
+                        <a class="nav-link" id="v-pills-equipment-tab" data-bs-toggle="pill" href="#v-pills-equipment" role="tab" aria-controls="v-pills-equipment" aria-selected="false">Equipment</a>
+                        <a class="nav-link" id="v-pills-drivers-tab" data-bs-toggle="pill" href="#v-pills-drivers" role="tab" aria-controls="v-pills-drivers" aria-selected="false">Drivers</a>
+                        <a class="nav-link" id="v-pills-insurance-tab" data-bs-toggle="pill" href="#v-pills-insurance" role="tab" aria-controls="v-pills-insurance" aria-selected="false">Insurance</a>
+                        <a class="nav-link" id="v-pills-review-tab" data-bs-toggle="pill" href="#v-pills-review" role="tab" aria-controls="v-pills-review" aria-selected="false">Review & Submit</a>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="tab-content" id="v-pills-tabContent">
+                        <div class="tab-pane fade show active" id="v-pills-business" role="tabpanel" aria-labelledby="v-pills-business-tab">
+                            <h4>Business Information</h4>
+                            <form method="post" id="businessForm">
+                                <div class="mb-3">
+                                    <label for="businessName" class="form-label">Business Name</label>
+                                    <input type="text" class="form-control" id="businessName" name="BusinessName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contactInfo" class="form-label">Contact Information</label>
+                                    <textarea class="form-control" id="contactInfo" name="ContactInfo" rows="3" required></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="tierLevel" class="form-label">Tier Level</label>
+                                    <select class="form-select" id="tierLevel" name="TierLevel" required>
+                                        <option value="">Select Tier Level</option>
+                                        <option value="Tier 1">Tier 1</option>
+                                        <option value="Tier 2">Tier 2</option>
+                                        <option value="Tier 3">Tier 3</option>
+                                    </select>
+                                </div>
+                                <button type="button" class="btn btn-primary" onclick="saveBusinessInfo()">Next: Equipment</button>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-equipment" role="tabpanel" aria-labelledby="v-pills-equipment-tab">
+                            <h4>Equipment Information</h4>
+                            <form method="post" id="equipmentForm">
+                                <div class="mb-3">
+                                    <label for="category" class="form-label">Category</label>
+                                    <select class="form-select" id="category" name="Category" required>
+                                        <option value="">Select Category</option>
+                                        <option value="Push">Push</option>
+                                        <option value="LoadHaul">LoadHaul</option>
+                                        <option value="Leaner">Leaner</option>
+                                        <option value="Grinding">Grinding</option>
+                                        <option value="HaulOut">HaulOut</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="type" class="form-label">Type</label>
+                                    <input type="text" class="form-control" id="type" name="Type" required>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="make" class="form-label">Make</label>
+                                        <input type="text" class="form-control" id="make" name="Make" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="model" class="form-label">Model</label>
+                                        <input type="text" class="form-control" id="model" name="Model" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="serialNumber" class="form-label">Serial Number</label>
+                                        <input type="text" class="form-control" id="serialNumber" name="SerialNumber" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="year" class="form-label">Year</label>
+                                        <input type="number" class="form-control" id="year" name="Year" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="capacity" class="form-label">Capacity</label>
+                                    <input type="text" class="form-control" id="capacity" name="Capacity" required>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <button type="button" class="btn btn-secondary" onclick="previousStep('v-pills-business-tab')">Previous</button>
+                                    <button type="button" class="btn btn-primary" onclick="saveEquipmentInfo()">Next: Drivers</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-drivers" role="tabpanel" aria-labelledby="v-pills-drivers-tab">
+                            <h4>Driver Information</h4>
+                            <form method="post" id="driverForm">
+                                <div class="mb-3">
+                                    <label for="licenseType" class="form-label">License Type</label>
+                                    <select class="form-select" id="licenseType" name="LicenseType" required>
+                                        <option value="">Select License Type</option>
+                                        <option value="Class A">Class A</option>
+                                        <option value="Class B">Class B</option>
+                                        <option value="Class C">Class C</option>
+                                        <option value="CDL">CDL</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="licenseState" class="form-label">License State</label>
+                                    <select class="form-select" id="licenseState" name="LicenseState" required>
+                                        <option value="">Select State</option>
+                                        <option value="AL">Alabama</option>
+                                        <option value="AK">Alaska</option>
+                                        <!-- Add all states here -->
+                                        <option value="WY">Wyoming</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="expirationDate" class="form-label">Expiration Date</label>
+                                    <input type="date" class="form-control" id="expirationDate" name="ExpirationDate" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="documentUpload" class="form-label">Upload License Document</label>
+                                    <input type="file" class="form-control" id="documentUpload" name="DocumentUpload" required>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <button type="button" class="btn btn-secondary" onclick="previousStep('v-pills-equipment-tab')">Previous</button>
+                                    <button type="button" class="btn btn-primary" onclick="saveDriverInfo()">Next: Insurance</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-insurance" role="tabpanel" aria-labelledby="v-pills-insurance-tab">
+                            <h4>Insurance Information</h4>
+                            <form method="post" id="insuranceForm">
+                                <div class="mb-3">
+                                    <label for="equipmentSelect" class="form-label">Select Equipment</label>
+                                    <select class="form-select" id="equipmentSelect" name="EquipmentID" required>
+                                        <option value="">Select Equipment</option>
+                                        <!-- Equipment options will be populated dynamically -->
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="insuranceExpirationDate" class="form-label">Insurance Expiration Date</label>
+                                    <input type="date" class="form-control" id="insuranceExpirationDate" name="ExpirationDate" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="insuranceDocumentUpload" class="form-label">Upload Insurance Document</label>
+                                    <input type="file" class="form-control" id="insuranceDocumentUpload" name="DocumentUpload" required>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <button type="button" class="btn btn-secondary" onclick="previousStep('v-pills-drivers-tab')">Previous</button>
+                                    <button type="button" class="btn btn-primary" onclick="saveInsuranceInfo()">Next: Review</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-review" role="tabpanel" aria-labelledby="v-pills-review-tab">
+                            <h4>Review & Submit</h4>
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <h5 class="mb-0">Business Information</h5>
+                                </div>
+                                <div class="card-body" id="businessReview">
+                                    <!-- Business info will be populated here -->
+                                </div>
+                            </div>
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <h5 class="mb-0">Equipment Information</h5>
+                                </div>
+                                <div class="card-body" id="equipmentReview">
+                                    <!-- Equipment info will be populated here -->
+                                </div>
+                            </div>
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <h5 class="mb-0">Driver Information</h5>
+                                </div>
+                                <div class="card-body" id="driverReview">
+                                    <!-- Driver info will be populated here -->
+                                </div>
+                            </div>
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <h5 class="mb-0">Insurance Information</h5>
+                                </div>
+                                <div class="card-body" id="insuranceReview">
+                                    <!-- Insurance info will be populated here -->
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button type="button" class="btn btn-secondary" onclick="previousStep('v-pills-insurance-tab')">Previous</button>
+                                <button type="button" class="btn btn-success" onclick="submitRegistration()">Submit Registration</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // JavaScript functions for form navigation and submission
+        function previousStep(tabId) {
+            document.getElementById(tabId).click();
+        }
+
+        function saveBusinessInfo() {
+            // Validate form
+            const form = document.getElementById('businessForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            // Store data in session storage
+            const businessData = {
+                businessName: document.getElementById('businessName').value,
+                contactInfo: document.getElementById('contactInfo').value,
+                tierLevel: document.getElementById('tierLevel').value
+            };
+            sessionStorage.setItem('businessData', JSON.stringify(businessData));
+
+            // Move to next step
+            document.getElementById('v-pills-equipment-tab').click();
+        }
+
+        function saveEquipmentInfo() {
+            // Validate form
+            const form = document.getElementById('equipmentForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            // Store data in session storage
+            const equipmentData = {
+                category: document.getElementById('category').value,
+                type: document.getElementById('type').value,
+                make: document.getElementById('make').value,
+                model: document.getElementById('model').value,
+                serialNumber: document.getElementById('serialNumber').value,
+                year: document.getElementById('year').value,
+                capacity: document.getElementById('capacity').value
+            };
+            
+            // Get existing equipment array or create new one
+            let equipmentArray = JSON.parse(sessionStorage.getItem('equipmentArray') || '[]');
+            equipmentArray.push(equipmentData);
+            sessionStorage.setItem('equipmentArray', JSON.stringify(equipmentArray));
+            
+            // Update equipment select dropdown
+            updateEquipmentSelect();
+
+            // Move to next step
+            document.getElementById('v-pills-drivers-tab').click();
+        }
+
+        function saveDriverInfo() {
+            // Validate form
+            const form = document.getElementById('driverForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            // Store data in session storage
+            const driverData = {
+                licenseType: document.getElementById('licenseType').value,
+                licenseState: document.getElementById('licenseState').value,
+                expirationDate: document.getElementById('expirationDate').value,
+                documentPath: document.getElementById('documentUpload').value
+            };
+            
+            // Get existing drivers array or create new one
+            let driversArray = JSON.parse(sessionStorage.getItem('driversArray') || '[]');
+            driversArray.push(driverData);
+            sessionStorage.setItem('driversArray', JSON.stringify(driversArray));
+
+            // Move to next step
+            document.getElementById('v-pills-insurance-tab').click();
+        }
+
+        function saveInsuranceInfo() {
+            // Validate form
+            const form = document.getElementById('insuranceForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            // Store data in session storage
+            const insuranceData = {
+                equipmentId: document.getElementById('equipmentSelect').value,
+                expirationDate: document.getElementById('insuranceExpirationDate').value,
+                documentPath: document.getElementById('insuranceDocumentUpload').value
+            };
+            
+            // Get existing insurance array or create new one
+            let insuranceArray = JSON.parse(sessionStorage.getItem('insuranceArray') || '[]');
+            insuranceArray.push(insuranceData);
+            sessionStorage.setItem('insuranceArray', JSON.stringify(insuranceArray));
+
+            // Populate review section
+            populateReviewSection();
+
+            // Move to next step
+            document.getElementById('v-pills-review-tab').click();
+        }
+
+        function updateEquipmentSelect() {
+            const equipmentSelect = document.getElementById('equipmentSelect');
+            equipmentSelect.innerHTML = '<option value="">Select Equipment</option>';
+            
+            const equipmentArray = JSON.parse(sessionStorage.getItem('equipmentArray') || '[]');
+            equipmentArray.forEach((equipment, index) => {
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = `${equipment.make} ${equipment.model} (${equipment.year})`;
+                equipmentSelect.appendChild(option);
+            });
+        }
+
+        function populateReviewSection() {
+            // Business info
+            const businessData = JSON.parse(sessionStorage.getItem('businessData') || '{}');
+            document.getElementById('businessReview').innerHTML = `
+                <p><strong>Business Name:</strong> ${businessData.businessName || ''}</p>
+                <p><strong>Contact Info:</strong> ${businessData.contactInfo || ''}</p>
+                <p><strong>Tier Level:</strong> ${businessData.tierLevel || ''}</p>
+            `;
+
+            // Equipment info
+            const equipmentArray = JSON.parse(sessionStorage.getItem('equipmentArray') || '[]');
+            let equipmentHtml = '';
+            equipmentArray.forEach((equipment, index) => {
+                equipmentHtml += `
+                    <div class="mb-3">
+                        <h6>Equipment ${index + 1}</h6>
+                        <p><strong>Category:</strong> ${equipment.category || ''}</p>
+                        <p><strong>Type:</strong> ${equipment.type || ''}</p>
+                        <p><strong>Make/Model:</strong> ${equipment.make || ''} ${equipment.model || ''}</p>
+                        <p><strong>Serial Number:</strong> ${equipment.serialNumber || ''}</p>
+                        <p><strong>Year:</strong> ${equipment.year || ''}</p>
+                        <p><strong>Capacity:</strong> ${equipment.capacity || ''}</p>
+                    </div>
+                `;
+            });
+            document.getElementById('equipmentReview').innerHTML = equipmentHtml || '<p>No equipment added</p>';
+
+            // Driver info
+            const driversArray = JSON.parse(sessionStorage.getItem('driversArray') || '[]');
+            let driversHtml = '';
+            driversArray.forEach((driver, index) => {
+                driversHtml += `
+                    <div class="mb-3">
+                        <h6>Driver ${index + 1}</h6>
+                        <p><strong>License Type:</strong> ${driver.licenseType || ''}</p>
+                        <p><strong>License State:</strong> ${driver.licenseState || ''}</p>
+                        <p><strong>Expiration Date:</strong> ${driver.expirationDate || ''}</p>
+                        <p><strong>Document:</strong> ${driver.documentPath.split('\\').pop() || ''}</p>
+                    </div>
+                `;
+            });
+            document.getElementById('driverReview').innerHTML = driversHtml || '<p>No drivers added</p>';
+
+            // Insurance info
+            const insuranceArray = JSON.parse(sessionStorage.getItem('insuranceArray') || '[]');
+            let insuranceHtml = '';
+            insuranceArray.forEach((insurance, index) => {
+                const equipmentIndex = insurance.equipmentId;
+                const equipment = equipmentArray[equipmentIndex] || {};
+                insuranceHtml += `
+                    <div class="mb-3">
+                        <h6>Insurance ${index + 1}</h6>
+                        <p><strong>Equipment:</strong> ${equipment.make || ''} ${equipment.model || ''} (${equipment.year || ''})</p>
+                        <p><strong>Expiration Date:</strong> ${insurance.expirationDate || ''}</p>
+                        <p><strong>Document:</strong> ${insurance.documentPath.split('\\').pop() || ''}</p>
+                    </div>
+                `;
+            });
+            document.getElementById('insuranceReview').innerHTML = insuranceHtml || '<p>No insurance added</p>';
+        }
+
+        function submitRegistration() {
+            // Get all data from session storage
+            const businessData = JSON.parse(sessionStorage.getItem('businessData') || '{}');
+            const equipmentArray = JSON.parse(sessionStorage.getItem('equipmentArray') || '[]');
+            const driversArray = JSON.parse(sessionStorage.getItem('driversArray') || '[]');
+            const insuranceArray = JSON.parse(sessionStorage.getItem('insuranceArray') || '[]');
+
+            // Create registration data object
+            const registrationData = {
+                subcontractor: businessData,
+                equipment: equipmentArray,
+                drivers: driversArray,
+                insurance: insuranceArray
+            };
+
+            // Submit data to API
+            fetch('/api/registration/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(registrationData)
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Registration failed');
+            })
+            .then(data => {
+                // Clear session storage
+                sessionStorage.clear();
+                
+                // Redirect to success page
+                window.location.href = '/Registration/Success?id=' + data.subcontractorId;
+            })
+            .catch(error => {
+                alert('Error submitting registration: ' + error.message);
+            });
+        }
+
+        // Initialize equipment select on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateEquipmentSelect();
+        });
+    </script>
+}
