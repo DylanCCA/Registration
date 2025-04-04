@@ -39,9 +39,9 @@ services:
       http_path: /health
 databases:
   - name: db
-    engine: mysql
+    engine: MYSQL
     version: "8"
-    production: false
+    production: true
     cluster_name: registration-db
     db_name: registrationdb
     db_user: doadmin
