@@ -1,0 +1,47 @@
+name: registration-app
+region: nyc1
+services:
+  - name: api
+    github:
+      repo: DylanCCA/Registration
+      branch: feature/initial-implementation
+      deploy_on_push: true
+    source_dir: Registration.API
+    http_port: 5085
+    instance_count: 1
+    instance_size_slug: basic-xs
+    routes:
+      - path: /api
+    envs:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ConnectionStrings__DefaultConnection
+        value: ${db.DATABASE_URL}
+    health_check:
+      http_path: /health
+  - name: web
+    github:
+      repo: DylanCCA/Registration
+      branch: feature/initial-implementation
+      deploy_on_push: true
+    source_dir: Registration.Web
+    http_port: 5280
+    instance_count: 1
+    instance_size_slug: basic-xs
+    routes:
+      - path: /
+    envs:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ApiSettings__BaseUrl
+        value: ${_self.HOSTNAME}/api
+    health_check:
+      http_path: /health
+databases:
+  - name: db
+    engine: mysql
+    version: "8"
+    production: false
+    cluster_name: registration-db
+    db_name: registrationdb
+    db_user: doadmin
